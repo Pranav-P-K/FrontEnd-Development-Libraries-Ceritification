@@ -1,0 +1,71 @@
+/* App.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    background-color: #282c34;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .quote-box {
+    background-color: #1e1e1e;
+    border-radius: 10px;
+    padding: 50px;
+    max-width: 600px;
+    text-align: center;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  .quote-text {
+    font-size: 2.2em;
+    font-weight: bold;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+  
+  .quote-author {
+    margin-top: 20px;
+    font-style: italic;
+    color: #aaaaaa;
+  }
+  
+  .buttons {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+  }
+  
+  .button {
+    padding: 12px 24px;
+    border: none;
+    background-color: #61dafb;
+    color: #282c34;
+    font-size: 1em;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .button:hover {
+    background-color: #21a1f1;
+  }
+  
+  .button a {
+    color: inherit;
+    text-decoration: none;
+  }
+  
