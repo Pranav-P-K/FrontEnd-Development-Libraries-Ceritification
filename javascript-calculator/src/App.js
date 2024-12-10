@@ -3,52 +3,60 @@ import "./App.css";
 
 const App = () => {
   const [input, setInput] = useState("0");
-  const [prevInput, setPrevInput] = useState("");
-  const [operator, setOperator] = useState("");
   const [fullExpression, setFullExpression] = useState("");
   const [isResult, setIsResult] = useState(false);
 
   const handleNumberClick = (value) => {
     if (isResult) {
       setInput(value);
-      setFullExpression(value); // Start new expression
+      setFullExpression(value);
       setIsResult(false);
     } else {
       setInput((prev) => (prev === "0" ? value : prev + value));
-      setFullExpression((prev) => (prev === "0" ? value : prev + value)); // Update expression
+      setFullExpression((prev) =>
+        prev === "0" ? value : prev + value
+      );
     }
   };
-  
+
   const handleOperatorClick = (value) => {
-    if (operator && !isResult) {
-      handleEquals();
+    if (isResult) {
+      setIsResult(false);
+      setFullExpression(input + ` ${value} `);
+    } else if (
+      !["+", "-", "*", "/"].includes(fullExpression.slice(-2).trim())
+    ) {
+      setFullExpression((prev) => prev + ` ${value} `);
     }
-    setOperator(value);
-    setPrevInput(input);
     setInput("0");
-    setFullExpression((prev) => prev + ` ${value} `); // Update expression with operator
   };
 
   const handleDecimalClick = () => {
     if (!input.includes(".")) {
       setInput(input + ".");
+      setFullExpression((prev) => prev + ".");
     }
   };
 
   const handleClear = () => {
     setInput("0");
-    setPrevInput("");
-    setOperator("");
-    setIsResult(false);
     setFullExpression("");
+    setIsResult(false);
   };
 
   const handleEquals = () => {
-    if (operator && prevInput !== "") {
-      const result = eval(`${prevInput} ${operator} ${input}`);
-      setInput(String(result));
-      setPrevInput("");
-      setOperator("");
+    try {
+      if (
+        !["+", "-", "*", "/"].includes(fullExpression.slice(-2).trim())
+      ) {
+        const result = eval(fullExpression);
+        setInput(String(result));
+        setFullExpression(String(result));
+        setIsResult(true);
+      }
+    } catch (error) {
+      setInput("Error");
+      setFullExpression("");
       setIsResult(true);
     }
   };

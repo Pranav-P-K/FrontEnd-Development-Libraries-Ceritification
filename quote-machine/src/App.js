@@ -1,18 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './App.css';
+import quotesData from './quotes'; // Import the quotes array
 
 const App = () => {
   const [quote, setQuote] = useState('');
   const [author, setAuthor] = useState('');
 
-  const fetchRandomQuote = async () => {
-    const response = await fetch('andruxnet-random-famous-quotes.p.rapidapi.com');
-    const data = await response.json();
-    setQuote(data.content);
-    setAuthor(data.author);
+  const fetchRandomQuote = () => {
+    const randomIndex = Math.floor(Math.random() * quotesData.length);
+    const randomQuote = quotesData[randomIndex];
+    setQuote(randomQuote.text);
+    setAuthor(randomQuote.author);
   };
 
-  useEffect(() => {
+  // Fetch the first quote when the component loads
+  React.useEffect(() => {
     fetchRandomQuote();
   }, []);
 
@@ -33,7 +35,12 @@ const App = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <img width="25" height="25" src="https://img.icons8.com/ios/50/twitterx--v1.png" alt="twitterx--v1"/>
+          <img
+            width="25"
+            height="25"
+            src="https://img.icons8.com/ios/50/twitterx--v1.png"
+            alt="twitter"
+          />
           Tweet
         </a>
         <button className="button" id="new-quote" onClick={fetchRandomQuote}>
